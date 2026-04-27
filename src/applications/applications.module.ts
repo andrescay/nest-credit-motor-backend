@@ -7,8 +7,8 @@ import {
   EVENTS_REPOSITORY,
   SIMULATION_PORT,
 } from './tokens';
-import { InMemoryApplicationsRepository } from './respositories/in-memory-applications.repository';
-import { InMemoryEventsRepository } from './respositories/in-memory-events.repository';
+import { InMemoryApplicationsRepository } from './repositories/in-memory-applications.repository';
+import { InMemoryEventsRepository } from './repositories/in-memory-events.repository';
 
 @Module({
   controllers: [ApplicationsController],

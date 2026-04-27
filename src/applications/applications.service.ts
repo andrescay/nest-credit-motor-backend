@@ -20,8 +20,8 @@ import {
   EVENTS_REPOSITORY,
   SIMULATION_PORT,
 } from './tokens';
-import type { ApplicationsRepository } from './respositories/applications.repository';
-import type { EventsRepository } from './respositories/events.repository';
+import type { ApplicationsRepository } from './repositories/applications.repository';
+import type { EventsRepository } from './repositories/events.repository';
 import type { SimulationPort } from './ports/simulation.port';
 import { ListApplicationsQueryDto } from './dto/list-applications.query.dtos';
 
