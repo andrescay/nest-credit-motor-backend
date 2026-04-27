@@ -26,7 +26,7 @@ describe('Applications API (e2e)', () => {
     await app.close();
   });
 
-  it('flujo create -> simulate -> finalize', async () => {
+  it('create -> simulate -> finalize flow', async () => {
     const created = await request(app.getHttpServer())
       .post('/applications')
       .send({

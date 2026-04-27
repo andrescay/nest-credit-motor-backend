@@ -33,7 +33,7 @@ describe('ApplicationsService', () => {
     service = moduleRef.get(ApplicationsService);
   });
 
-  it('crea solicitud en IN_PROGRESS', async () => {
+  it('creates application in IN_PROGRESS', async () => {
     const app = await service.create({
       customerDocument: '1001',
       customerName: 'Ana Perez',
@@ -45,7 +45,7 @@ describe('ApplicationsService', () => {
     expect(app.status).toBe(ApplicationStatus.IN_PROGRESS);
   });
 
-  it('rechaza edición cuando está finalizada', async () => {
+  it('rejects update when finalized', async () => {
     const app = await service.create({
       customerDocument: '1002',
       customerName: 'Luis Ruiz',
@@ -60,7 +60,7 @@ describe('ApplicationsService', () => {
     ).rejects.toBeDefined();
   });
 
-  it('registra simulación técnica fallida', async () => {
+  it('records failed technical simulation', async () => {
     const app = await service.create({
       customerDocument: '12349',
       customerName: 'Tecnico Error',
