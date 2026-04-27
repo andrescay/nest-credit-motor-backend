@@ -4,7 +4,7 @@ export interface ApplicationEvent {
   id: string;
   applicationId: string;
   type: ApplicationEventType;
-  ocurredAt: string;
+  occurredAt: string;
   requestId?: string;
   payload?: Record<string, unknown>;
 }
