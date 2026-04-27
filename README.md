@@ -67,6 +67,21 @@ npm run build
 npm run start:prod
 ```
 
+## Run with Docker
+
+```bash
+# build and run app + mongo
+cp .env.example .env
+docker compose up --build
+```
+
+Useful endpoints:
+
+- API: `http://localhost:3000`
+- Swagger: `http://localhost:3000/docs`
+
+For Azure container deployment details, check `docs/docker-azure.md`.
+
 ## Quality and Tests
 
 ```bash
@@ -92,3 +107,4 @@ npm run test:cov
 - Repositories and external integrations are injected using tokens and ports/adapters.
 - Current persistence and simulation are mocked/in-memory for study purposes.
 - The design is prepared to evolve to production adapters (for example, MongoDB and real simulation providers).
+- Runtime variables for future Mongo migration are already included in Docker setup (`STORAGE_PROVIDER`, `MONGODB_URI`).
