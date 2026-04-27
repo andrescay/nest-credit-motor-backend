@@ -1,0 +1,29 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: credit-motor-backend:local
+    container_name: credit-motor-app
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      STORAGE_PROVIDER: "${STORAGE_PROVIDER:-in-memory}"
+      MONGODB_URI: "${MONGODB_URI:-mongodb://mongo:27017/credit_motor}"
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:8
+    container_name: credit-motor-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
+volumes:
+  mongo_data:
