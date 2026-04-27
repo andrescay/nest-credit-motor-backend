@@ -10,7 +10,7 @@ export class ListApplicationsQueryDto {
   @IsString()
   status?: ApplicationStatus;
 
-  @ApiPropertyOptional()
+  @ApiPropertyOptional({ enum: ApplicationChannel })
   @IsOptional()
   @IsString()
   channel?: ApplicationChannel;
