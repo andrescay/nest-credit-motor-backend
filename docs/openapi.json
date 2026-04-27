@@ -1,0 +1,243 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/applications": {
+      "post": {
+        "operationId": "ApplicationsController_create",
+        "parameters": [
+          {
+            "name": "x-request-id",
+            "required": true,
+            "in": "header",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateApplicationDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } },
+        "tags": ["applications"]
+      },
+      "get": {
+        "operationId": "ApplicationsController_findAll",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "IN_PROGRESS",
+                "PENDING_VALIDATION",
+                "FINALIZED",
+                "ABANDONED"
+              ]
+            }
+          },
+          {
+            "name": "channel",
+            "required": false,
+            "in": "query",
+            "schema": { "type": "string", "enum": ["SELF_SERVICE", "ASSISTED"] }
+          },
+          {
+            "name": "customerDocument",
+            "required": false,
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "createdFrom",
+            "required": false,
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "createdTo",
+            "required": false,
+            "in": "query",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["applications"]
+      }
+    },
+    "/applications/{id}": {
+      "get": {
+        "operationId": "ApplicationsController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["applications"]
+      },
+      "patch": {
+        "operationId": "ApplicationsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "x-request-id",
+            "required": true,
+            "in": "header",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateApplicationDto" }
+            }
+          }
+        },
+        "responses": { "200": { "description": "" } },
+        "tags": ["applications"]
+      }
+    },
+    "/applications/{id}/simulate-offer": {
+      "post": {
+        "operationId": "ApplicationsController_simulateOffer",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "x-request-id",
+            "required": true,
+            "in": "header",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "201": { "description": "" } },
+        "tags": ["applications"]
+      }
+    },
+    "/applications/{id}/finalize": {
+      "post": {
+        "operationId": "ApplicationsController_finalize",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "x-request-id",
+            "required": true,
+            "in": "header",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "201": { "description": "" } },
+        "tags": ["applications"]
+      }
+    },
+    "/applications/{id}/abandon": {
+      "post": {
+        "operationId": "ApplicationsController_abandon",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "x-request-id",
+            "required": true,
+            "in": "header",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AbandonApplicationDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } },
+        "tags": ["applications"]
+      }
+    },
+    "/applications/{id}/events": {
+      "get": {
+        "operationId": "ApplicationsController_events",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["applications"]
+      }
+    }
+  },
+  "info": {
+    "title": "Credit Motor API",
+    "description": "Digital applications lifecycle API",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CreateApplicationDto": {
+        "type": "object",
+        "properties": {
+          "customerDocument": { "type": "string" },
+          "customerName": { "type": "string" },
+          "customerEmail": { "type": "string" },
+          "channel": { "type": "string" },
+          "product": { "type": "string" },
+          "requestedAmount": { "type": "number" },
+          "requestedTermMonths": { "type": "number" }
+        },
+        "required": ["customerDocument", "customerName", "channel", "product"]
+      },
+      "UpdateApplicationDto": {
+        "type": "object",
+        "properties": {
+          "customerDocument": { "type": "string" },
+          "customerName": { "type": "string" },
+          "customerEmail": { "type": "string" },
+          "channel": { "type": "string" },
+          "product": { "type": "string" },
+          "requestedAmount": { "type": "number" },
+          "requestedTermMonths": { "type": "number" }
+        }
+      },
+      "AbandonApplicationDto": {
+        "type": "object",
+        "properties": { "reason": { "type": "string" } },
+        "required": ["reason"]
+      }
+    }
+  }
+}
